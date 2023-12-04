@@ -5,13 +5,13 @@
 /**
  * split_string- splits strings by " "
  * @str: input string
- * @delim: demilter
+ * @len: length of str
  * Return: pointer to array of commands(strings)
  */
 
-char **split_string(char *str, char *delim)
+char **split_string(char *str, size_t len)
 {
-	size_t len = strlen(str);
+	char *delim = " ";
 	char **words = malloc(len + 1);
 	int count = 0;
 	char *token = strtok(str, delim);

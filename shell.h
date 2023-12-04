@@ -8,5 +8,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-char **split_string(char *str, char *delim);
+extern char **environ;
+char **split_string(char *str, size_t delim);
 #endif /* SHELL_H */
