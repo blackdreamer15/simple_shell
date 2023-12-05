@@ -8,7 +8,7 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <sys/sysmacros>
+#include <sys/sysmacros.h>
 
 extern char **environ;
 char **split_string(char *str, size_t delim);
