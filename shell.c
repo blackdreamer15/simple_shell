@@ -75,6 +75,6 @@ int main(int ac, char *av[])
 		free_av(argv);
 		l = 0; /* reset to 0*/
 	}
-	free(cmd); /* free the last line*/
+	free(cmd);
 	return (0);
 }
