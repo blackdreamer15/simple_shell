@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * execute_cmd- executes command
  * @av: input command
@@ -47,27 +46,35 @@ int execute_cmd(char **av, pid_t pid, int *status, int flag)
 int main(int ac, char *av[])
 {
 	char **argv;
-	char *cmd;
-	size_t l;
+	char *cmd = NULL; /* initialize to NULL*/
+	size_t l = 0; /* initialize to 0*/
 	pid_t child_pid;
 	ssize_t len;
 	int status;
 
 	if (ac > 1)
 	{
+
 		child_pid = fork();
 		execute_cmd(av, child_pid, &status, 0);
 	}
-	printf("#shell$ "); /*prompt*/
+	prompt(0);
 	while ((len = getline(&cmd, &l, stdin)) != -1)
 	{
 		if (*cmd == '\n') /*usr presses enter*/
 			continue; /*do nothing*/
 		argv = split_string(cmd, len); /*take command to argv*/
-
 		child_pid = fork();
+
+		if (child_pid == -1)
+			continue;
 		execute_cmd(argv, child_pid, &status, 1);
-		printf("#shell$ ");
+		prompt(0);
+		free(cmd);
+		cmd = 0;
+		free_av(argv);
+		l = 0; /* reset to 0*/
 	}
+	free(cmd); /* free the last line*/
 	return (0);
 }

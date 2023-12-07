@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "shell.h"
 
 /**
  * split_string- splits strings by " "
@@ -14,9 +12,10 @@ char **split_string(char *str, size_t len)
 	char *delim = " ";
 	char **words = malloc(len + 1);
 	int count = 0;
-	char *token = strtok(str, delim);
+	char *token;
 
 	str[strcspn(str, "\n")] = '\0';
+	token = strtok(str, delim);
 
 	while (token != NULL)
 	{
@@ -28,4 +27,20 @@ char **split_string(char *str, size_t len)
 	}
 	words[count] = NULL;
 	return (words);
+}
+
+/**
+ * free_av- frees av
+ * @av: input array
+ * Return: Nothing
+ */
+void free_av(char **av)
+{
+	int i;
+
+	for (i = 0; av[i] != NULL; i++)
+	{
+		free(av[i]);
+	}
+	free(av);
 }
