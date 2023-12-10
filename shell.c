@@ -25,8 +25,11 @@ int main(int ac, char *av[])
 
 	while ((nread = getline(&cmd, &len, stdin)) != -1)
 	{
-		if (*cmd == '\n') /*usr presses enter*/
-			continue;	  /*do nothing*/
+		if (*cmd == '\n')
+		{
+			prompt(0);
+			continue;
+		}
 
 		argv = split_string(cmd); /*take command to argv*/
 		child_pid = fork();
