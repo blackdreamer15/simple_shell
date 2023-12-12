@@ -23,22 +23,20 @@
 
 extern char **environ;
 
-int add_numbers(int nma, int mpa);
-
 void display_prompt(void);
-void read_input(char *input, size_t size_of_input);
-void execute_prompt(const char *command);
+void get_input(char *input, size_t input_size);
+void execute_prompt(const char *cmd);
 
-void process_cmd(char *command);
-void execute_command_with_args(const char *command);
-void execute_command(const char *command);
-int is_command_in_path(const char *command);
+void process_cmd(char *cmd);
+void execute_command_with_args(const char *cmd);
+void execute_command(const char *cmd);
+int is_command_in_path(const char *cmd);
 
 void print_environment(void);
-void handle_setenv(const char *command);
-void handle_unsetenv(const char *command);
-int set_environment_variable(const char *variable, const char *value);
-int unset_environment_variable(const char *variable);
+void handle_setenv(const char *cmd);
+void handle_unsetenv(const char *cmd);
+int set_environment_variable(const char *var, const char *val);
+int unset_environment_variable(const char *var);
 
 void change_directory(const char *path);
 
@@ -51,7 +49,6 @@ void _printf(const char *print_command, ...);
 ssize_t _getline(char **lineptr, size_t *n);
 char *_strtok(char *input_str, char *delimiter);
 int _strncmp(const char *str1, const char *str2, size_t max_chars);
-char *my_strstr(const char *stack, const char *needle);
-
 
 #endif /* SHELL_H */
+
