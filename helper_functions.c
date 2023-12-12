@@ -31,7 +31,7 @@ int _strncmp(const char *str1, const char *str2, size_t n)
 	{
 		if (*str1 != *str2)
 			return (*str1 - *str2);
-	
+
 		str1++;
 		str2++;
 		n--;
@@ -78,3 +78,4 @@ char *_strtok(char *input_str, char *delim)
 
 	return (result);
 }
+

@@ -1,30 +1,30 @@
 #include "shell.h"
 
 /**
- * process_command - Processes individual shell commands
+ * process_cmd - Processes individual shell commands
  * @command: The command to be processed
  */
-
-void process_command(char *command)
+void process_cmd(char *command)
 {
-	if (my_strncmp(command, "exit", 4) == 0)
+	if (_strncmp(command, "exit", 4) == 0)
 		handle_exit(command);
-	
-	else if (my_strncmp(command, "env", 3) == 0)
+
+	else if (_strncmp(command, "env", 3) == 0)
 		print_environment();
-	
-	else if (my_strncmp(command, "setenv", 6) == 0)
+
+	else if (_strncmp(command, "setenv", 6) == 0)
 		handle_setenv(command);
-	
-	else if (my_strncmp(command, "unsetenv", 8) == 0)
+
+	else if (_strncmp(command, "unsetenv", 8) == 0)
 		handle_unsetenv(command);
-	
-	else if (my_strncmp(command, "cd", 2) == 0)
+
+	else if (_strncmp(command, "cd", 2) == 0)
 	{
-		char *path = my_strtok(command + 3, " ");
+		char *path = _strtok(command + 3, " ");
 
 		change_directory(path);
 	}
+
 	else
 		execute_prompt(command);
 }
@@ -37,12 +37,12 @@ void execute_command_with_args(const char *command)
 {
 	char *args[170];
 	int arg_c = 0;
-	char *tokenized_cmd = my_strtok((char *)command, " ");
+	char *tokenized_cmd = _strtok((char *)command, " ");
 
 	while (tokenized_cmd != NULL)
 	{
 		args[arg_c++] = tokenized_cmd;
-		tokenized_cmd = my_strtok(NULL, " ");
+		tokenized_cmd = _strtok(NULL, " ");
 	}
 	args[arg_c] = NULL;
 	if (execvp(args[0], args) == -1)
@@ -57,12 +57,12 @@ void execute_command(const char *command)
 {
 	char *args[170];
 	int arg_c = 0;
-	char *tokenized_cmd = my_strtok((char *)command, " ");
+	char *tokenized_cmd = _strtok((char *)command, " ");
 
 	while (tokenized_cmd != NULL)
 	{
 		args[arg_c++] = tokenized_cmd;
-		tokenized_cmd = my_strtok(NULL, " ");
+		tokenized_cmd = _strtok(NULL, " ");
 	}
 	args[arg_c] = NULL;
 
@@ -73,7 +73,7 @@ void execute_command(const char *command)
 
 		if (child_process == -1)
 		{
-			my_printf("Forking error...\n");
+			_printf("Forking error...\n");
 			exit(EXIT_FAILURE);
 		}
 		else if (child_process == 0)
@@ -90,7 +90,7 @@ void execute_command(const char *command)
 		}
 	}
 	else
-		my_printf("bash: %s: command not found\n", args[0]);
+		_printf("bash: %s: command not found\n", args[0]);
 }
 
 
@@ -110,7 +110,7 @@ int is_command_in_path(const char *command)
 
 	path = getenv("PATH");
 	path_copy = strdup(path);
-	token = my_strtok(path_copy, ":");
+	token = _strtok(path_copy, ":");
 
 	while (token != NULL)
 	{
@@ -122,8 +122,9 @@ int is_command_in_path(const char *command)
 			free(path_copy);
 			return (1);
 		}
-		token = my_strtok(NULL, ":");
+		token = _strtok(NULL, ":");
 	}
 	free(path_copy);
 	return (0);
 }
+

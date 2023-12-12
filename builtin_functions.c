@@ -44,7 +44,7 @@ void change_directory(const char *path)
  */
 void exit_shell(int status)
 {
-	my_printf("Exiting shell with status %d.\n", status);
+	_printf("Exiting shell with status %d.\n", status);
 	exit(status);
 }
 
@@ -57,7 +57,7 @@ void print_environment(void)
 
 	while (environ[index] != NULL)
 	{
-		my_printf("%s\n", environ[index]);
+		_printf("%s\n", environ[index]);
 		index++;
 	}
 }

@@ -8,20 +8,16 @@
 
 void handle_setenv(const char *command)
 {
-	char *variable = my_strtok((char *)command + 7, " ");
-	char *value = my_strtok(NULL, " ");
+	char *variable = _strtok((char *)command + 7, " ");
+	char *value = _strtok(NULL, " ");
 
 	if (variable && value)
 	{
 		if (set_environment_variable(variable, value) == -1)
-		{
 			write(STDERR_FILENO, "Failed to set environment variable.\n", 36);
-		}
 	}
 	else
-	{
 		write(STDERR_FILENO, "Usage: setenv VARIABLE VALUE\n", 29);
-	}
 }
 
 /**
@@ -32,7 +28,7 @@ void handle_setenv(const char *command)
 
 void handle_unsetenv(const char *command)
 {
-	char *variable = my_strtok((char *)command + 9, " ");
+	char *variable = _strtok((char *)command + 9, " ");
 
 	if (variable)
 	{
@@ -42,3 +38,4 @@ void handle_unsetenv(const char *command)
 	else
 		write(STDERR_FILENO, "Usage: unsetenv VARIABLE\n", 26);
 }
+

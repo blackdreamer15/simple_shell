@@ -1,17 +1,18 @@
 #include "shell.h"
 
 /**
- * display_prompt - displays the shell promp
+ * display_prompt - displays the shell prompt
+ * Return: void
  */
 void display_prompt(void)
 {
-	my_printf("$ ");
+	_printf("$ ");
 }
 
 /**
  * execute_prompt - executes the prompt from user
  * @prompt: the command to be executed
- *
+ * Return:void
  */
 void execute_prompt(const char *prompt)
 {
@@ -22,7 +23,7 @@ void execute_prompt(const char *prompt)
  * read_input - gets prompt as input from users
  * @input: the command to executed
  * @size_of_input: size of the prompt
- *
+ * Return: void
  */
 void read_input(char *input, size_t size_of_input)
 {
@@ -30,15 +31,16 @@ void read_input(char *input, size_t size_of_input)
 	{
 		if (feof(stdin))
 		{
-			my_printf("\n");
+			_printf("\n");
 			exit(EXIT_SUCCESS);
 		}
 		else
 		{
-			my_printf("Input Error.\n");
+			_printf("Input Error.\n");
 			exit(EXIT_FAILURE);
 		}
 	}
 
 	input[strcspn(input, "\n")] = '\0';
 }
+
