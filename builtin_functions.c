@@ -31,7 +31,7 @@ void change_dir(const char *path)
 		return;
 	}
 	/* Update the PWD environment variable */
-	if (set_environment_variable("PWD", curr_path) == -1)
+	if (set_env_var("PWD", curr_path) == -1)
 	{
 		perror("setenv");
 		return;
@@ -49,9 +49,10 @@ void exit_shell(int status)
 }
 
 /**
- * print_environment - prints the current environment variables
+ * print_env - prints the current environment variables
+ * Return: void
  */
-void print_environment(void)
+void print_env(void)
 {
 	int index = 0;
 
@@ -63,12 +64,12 @@ void print_environment(void)
 }
 
 /**
- * set_environment_variable - sets or updates an environment variable
- * @var: the name of the environment variable
- * @val: the value to set for the environment variable
+ * set_env_var - sets or updates an environment variable
+ * @var: name of the environment variable
+ * @val: value to set for the environment variable
  * Return: 0 on success, -1 on failure
  */
-int set_environment_variable(const char *var, const char *val)
+int set_env_var(const char *var, const char *val)
 {
 	if (setenv(var, val, 1) == -1)
 	{
@@ -79,11 +80,11 @@ int set_environment_variable(const char *var, const char *val)
 }
 
 /**
- * unset_environment_variable - unsets an environment variable
- * @var: the name of the environment variable to unset
+ * unset_env_var - unsets an environment variable
+ * @var: name of the environment variable to unset
  * Return: 0 on success, -1 on failure
  */
-int unset_environment_variable(const char *var)
+int unset_env_var(const char *var)
 {
 	if (unsetenv(var) == -1)
 	{

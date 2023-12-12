@@ -32,11 +32,11 @@ void exec_cmd_with_args(const char *cmd);
 void exec_cmd(const char *cmd);
 int cmd_in_path_checker(const char *cmd);
 
-void print_environment(void);
+void print_env(void);
 void handle_setenv(const char *cmd);
 void handle_unsetenv(const char *cmd);
-int set_environment_variable(const char *var, const char *val);
-int unset_environment_variable(const char *var);
+int set_env_var(const char *var, const char *val);
+int unset_env_var(const char *var);
 
 void change_dir(const char *path);
 

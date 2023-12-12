@@ -10,7 +10,7 @@ void process_cmd(char *cmd)
 		handle_exit(cmd);
 
 	else if (_strncmp(cmd, "env", 3) == 0)
-		print_environment();
+		print_env();
 
 	else if (_strncmp(cmd, "setenv", 6) == 0)
 		handle_setenv(cmd);
