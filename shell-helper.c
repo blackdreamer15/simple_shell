@@ -1,6 +1,47 @@
 #include "shell.h"
 
 /**
+ * spath-serches path
+ * @ls: input list of path
+ *
+ * Return: 0 if found
+ */
+char *spath(list_t *ls)
+{
+	struct stat st;
+
+	while(ls)
+	{
+		if(stat(ls->str, &st) == 0)
+			return (ls->str);
+		else
+			continue;
+		ls++;
+	}
+	return(0);
+}
+
+/**
+ * _execvp- executes with path specified
+ *
+ * @av: input commmand
+ * Return: 0 success
+ */
+int _execvp(char **av)
+{
+	char *str, *path;
+
+	str = _getenv("PATH");
+	path = _strcat(str, "/usr/bin:/bin");
+	printf("%s\n", path);
+	_setenv("PATH", "/usr/bin:/bin", 1);
+	printf("%s\n", _getenv("PATH"));
+	if ((execve(av[0], av, environ)) == -1)
+		return (-1);
+}
+
+
+/**
  * execute_cmd- executes command
  * @av: input command
  * @pid: current process id
@@ -15,13 +56,13 @@ int execute_cmd(char **av, pid_t pid, int *status, int flag)
 
 	if (pid == 0)
 	{
-		if (flag && (execve(av[0], av, environ)) == -1)
+		if (flag && _execvp(av) == -1)
 		{
 			sprintf(cmd, "bash: %s", av[0]);
 			perror(cmd);
 		}
 
-		else if (!flag && (execve(av[1], av + 1, environ)) == -1)
+		else if (!flag && _execvp(&av[1]) == -1)
 		{
 			sprintf(cmd, "bash: %s", av[1]);
 			perror(cmd);
