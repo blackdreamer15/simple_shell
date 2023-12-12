@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * display_prompt - displays the shell prompt
+ * display_prompt - displays ready state of the shell prompt
  * Return: void
  */
 void display_prompt(void)
@@ -20,7 +20,7 @@ void execute_prompt(const char *cmd)
 }
 
 /**
- * get_input - gets prompt as input from users
+ * get_input - gets stdin of the prompt from user
  * @input: the command to executed
  * @input_size: size of the prompt
  * Return: void

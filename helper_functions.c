@@ -42,9 +42,9 @@ int _strncmp(const char *str1, const char *str2, size_t n)
 
 /**
  * _strtok - breaks up a string into tokens
- * @input_str: string to be tokenized.
- * @delim: character specifying where the string is to be broken.
- * Return: pointer to a tokenized string
+ * @input_str: string to be tokenized
+ * @delim: character specifying the breakpoint of the string
+ * Return: pointer to the tokenized string
  */
 char *_strtok(char *input_str, char *delim)
 {
