@@ -1,7 +1,6 @@
 #ifndef SHELL_H
 #define SHELL_H
-#define MAX_INPUT 1024
-#define MAX_ARGS 64
+
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -10,6 +9,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/sysmacros.h>
+#define MAX_INPUT 1024
+#define MAX_ARGS 64
 
 /**
  * struct list_s - singly linked list
@@ -49,7 +50,7 @@ size_t _arrlen(char **arr);
 
 /*_split.c*/
 void free_av(char **av);
-char **split_string(char *str, size_t delim);
+char **split_string(char *str);
 
 /*_strmanip.c*/
 char *_strcpy(char *dest, char *src);
@@ -57,5 +58,13 @@ char *_strdup(char *str);
 char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
 size_t _strlen(char *s);
+
+extern char **environ;
+
+int _putchar(char c);
+int prompt(char *c);
+char **split_string(char *str);
+void free_av(char **av);
+int execute_cmd(char **av, pid_t pid, int *status, int flag);
 
 #endif /* SHELL_H */

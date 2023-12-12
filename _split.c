@@ -3,14 +3,13 @@
 /**
  * split_string- splits strings by " "
  * @str: input string
- * @len: length of str
  * Return: pointer to array of commands(strings)
  */
 
-char **split_string(char *str, size_t len)
+char **split_string(char *str)
 {
 	char *delim = " ";
-	char **words = malloc(sizeof(char *) * (len));
+	char **words = malloc(sizeof(char *) * (MAX_ARGS));
 	int count = 0;
 	char *token;
 
