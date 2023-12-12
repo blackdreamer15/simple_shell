@@ -2,11 +2,11 @@
 
 /**
  * handle_exit - Handles the exit command
- * @command: The exit command
+ * @cmd: The exit command
  */
-void handle_exit(char *command)
+void handle_exit(char *cmd)
 {
-	int status = atoi(command + 5);
+	int status = atoi(cmd + 5);
 
 	exit_shell(status);
 }
