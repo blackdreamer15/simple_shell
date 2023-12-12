@@ -28,9 +28,9 @@ void get_input(char *input, size_t input_size);
 void execute_prompt(const char *cmd);
 
 void process_cmd(char *cmd);
-void execute_command_with_args(const char *cmd);
-void execute_command(const char *cmd);
-int is_command_in_path(const char *cmd);
+void exec_cmd_with_args(const char *cmd);
+void exec_cmd(const char *cmd);
+int cmd_in_path_checker(const char *cmd);
 
 void print_environment(void);
 void handle_setenv(const char *cmd);
