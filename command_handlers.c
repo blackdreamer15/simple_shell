@@ -30,47 +30,46 @@ void process_cmd(char *cmd)
 }
 
 /**
- * execute_command_with_args - executes a command with arguments
+ * exec_cmd_with_args - executes a command with arguments
  * @cmd: the command to be executed
  */
-void execute_command_with_args(const char *cmd)
+void exec_cmd_with_args(const char *cmd)
 {
 	char *args[170];
-	int arg_c = 0;
+	int argc = 0;
 	char *tokenized_cmd = _strtok((char *)cmd, " ");
 
 	while (tokenized_cmd != NULL)
 	{
-		args[arg_c++] = tokenized_cmd;
+		args[argc++] = tokenized_cmd;
 		tokenized_cmd = _strtok(NULL, " ");
 	}
 
-	args[arg_c] = NULL;
+	args[argc] = NULL;
 
 	if (execvp(args[0], args) == -1)
 		perror("bash");
 }
 
 /**
- * execute_command - executes a command with arguments
+ * exec_cmd - executes a command with arguments
  * @cmd: the command to be executed
 */
-void execute_command(const char *cmd)
+void exec_cmd(const char *cmd)
 {
 	char *args[170];
-	int arg_c = 0;
+	int argc = 0;
 	char *tokenized_cmd = _strtok((char *)cmd, " ");
 
 	while (tokenized_cmd != NULL)
 	{
-		args[arg_c++] = tokenized_cmd;
+		args[argc++] = tokenized_cmd;
 		tokenized_cmd = _strtok(NULL, " ");
 	}
 
-	args[arg_c] = NULL;
+	args[argc] = NULL;
 
-	/*Check if the command exists in the PATH */
-	if (is_command_in_path(args[0]))
+	if (cmd_in_path_checker(args[0]))
 	{
 		pid_t process_pid = fork();
 
@@ -98,11 +97,11 @@ void execute_command(const char *cmd)
 
 
 /**
- * is_command_in_path - checks if a command exists in the PATH
+ * cmd_in_path_checker - checks if a command exists in the PATH
  * @cmd: the command to be checked
  * Return: 1 if the command exists, 0 otherwise
 */
-int is_command_in_path(const char *cmd)
+int cmd_in_path_checker(const char *cmd)
 {
 	char *path;
 	char *path_copy;
