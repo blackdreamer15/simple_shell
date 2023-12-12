@@ -17,7 +17,7 @@ int main(void)
 
 		get_input(usr_cmd, sizeof(usr_cmd));
 
-		cmd_count = split_commands(usr_cmd, cmds);
+		cmd_count = split_str(usr_cmd, cmds);
 
 		for (i = 0; i < cmd_count; ++i)
 			process_cmd(cmds[i]);
