@@ -3,17 +3,16 @@
 /**
  * handle_setenv - Handles the setenv command
  * by parsing the input and calling set_environment_variable
- * @command: The input command containing the setenv parameters
+ * @cmd: The input command containing the setenv parameters
  */
-
-void handle_setenv(const char *command)
+void handle_setenv(const char *cmd)
 {
-	char *variable = _strtok((char *)command + 7, " ");
-	char *value = _strtok(NULL, " ");
+	char *var = _strtok((char *)cmd + 7, " ");
+	char *val = _strtok(NULL, " ");
 
-	if (variable && value)
+	if (var && val)
 	{
-		if (set_environment_variable(variable, value) == -1)
+		if (set_environment_variable(var, val) == -1)
 			write(STDERR_FILENO, "Failed to set environment variable.\n", 36);
 	}
 	else
@@ -23,17 +22,17 @@ void handle_setenv(const char *command)
 /**
  * handle_unsetenv - Handles the unsetenv command
  * by parsing the input and calling unset_environment_variable
- * @command: The input command containing the unsetenv parameters
+ * @cmd: The input command containing the unsetenv parameters
  */
 
-void handle_unsetenv(const char *command)
+void handle_unsetenv(const char *cmd)
 {
-	char *variable = _strtok((char *)command + 9, " ");
+	char *var = _strtok((char *)cmd + 9, " ");
 
-	if (variable)
+	if (var)
 	{
-		if (unset_environment_variable(variable) == -1)
-			write(STDERR_FILENO, "Failed to unset environment variable.\n", 38);
+		if (unset_environment_variable(var) == -1)
+			write(STDERR_FILENO, "Failure while unsetting environment variable.\n", 38);
 	}
 	else
 		write(STDERR_FILENO, "Usage: unsetenv VARIABLE\n", 26);
