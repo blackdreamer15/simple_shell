@@ -22,7 +22,7 @@ void process_cmd(char *cmd)
 	{
 		char *path = _strtok(cmd + 3, " ");
 
-		change_directory(path);
+		change_dir(path);
 	}
 
 	else

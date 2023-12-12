@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * change_directory - changes the current directory of the process
+ * change_dir - changes the current directory of the process
  * @path: the directory to change to
  */
-void change_directory(const char *path)
+void change_dir(const char *path)
 {
-	char current_path[PATH_MAX];
+	char curr_path[PATH_MAX];
 
 	/* If no argument is given, change to the home directory */
 	if (path == NULL)
@@ -19,7 +19,7 @@ void change_directory(const char *path)
 		}
 	}
 	/* Save the current working directory */
-	if (getcwd(current_path, sizeof(current_path)) == NULL)
+	if (getcwd(curr_path, sizeof(curr_path)) == NULL)
 	{
 		perror("getcwd");
 		return;
@@ -31,7 +31,7 @@ void change_directory(const char *path)
 		return;
 	}
 	/* Update the PWD environment variable */
-	if (set_environment_variable("PWD", current_path) == -1)
+	if (set_environment_variable("PWD", curr_path) == -1)
 	{
 		perror("setenv");
 		return;

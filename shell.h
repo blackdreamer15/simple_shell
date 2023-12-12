@@ -38,7 +38,7 @@ void handle_unsetenv(const char *cmd);
 int set_environment_variable(const char *var, const char *val);
 int unset_environment_variable(const char *var);
 
-void change_directory(const char *path);
+void change_dir(const char *path);
 
 int split_commands(char *input, char *cmds[]);
 
