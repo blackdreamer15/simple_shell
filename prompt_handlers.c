@@ -16,7 +16,7 @@ void display_prompt(void)
  */
 void execute_prompt(const char *cmd)
 {
-		execute_command(cmd);
+		exec_cmd(cmd);
 }
 
 /**
