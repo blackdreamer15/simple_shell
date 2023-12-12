@@ -1,28 +1,24 @@
 #include "shell.h"
 
 /**
- * main- the shell
- * @ac: number of argument passed
- * @av: arguments passed
- * Return: 0 on success
+ * main - entry point for the shell program
+ * Return: Always 0 on success
  */
 int main(void)
 {
-	char user_command[127];
-	char *commands[10];
-	int num_commands;
+	char usr_cmd[127];
+	char *cmds[10];
+	int cmd_count;
 	int i;
 
 	while (1)
 	{
 		display_prompt();
-		read_input(user_command, sizeof(user_command));
-		num_commands = split_commands(user_command, commands);
+		read_input(usr_cmd, sizeof(usr_cmd));
+		cmd_count = split_commands(usr_cmd, cmds);
 
-		for (i = 0; i < num_commands; ++i)
-		{
-			process_command(commands[i]);
-		}
+		for (i = 0; i < cmd_count; ++i)
+			execute_cmd(cmds[i]);
 	}
 	return (0);
 }
