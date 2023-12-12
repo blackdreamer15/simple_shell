@@ -2,81 +2,84 @@
 
 /**
  * process_cmd - Processes individual shell commands
- * @command: The command to be processed
+ * @cmd: The command to be processed
  */
-void process_cmd(char *command)
+void process_cmd(char *cmd)
 {
-	if (_strncmp(command, "exit", 4) == 0)
-		handle_exit(command);
+	if (_strncmp(cmd, "exit", 4) == 0)
+		handle_exit(cmd);
 
-	else if (_strncmp(command, "env", 3) == 0)
+	else if (_strncmp(cmd, "env", 3) == 0)
 		print_environment();
 
-	else if (_strncmp(command, "setenv", 6) == 0)
-		handle_setenv(command);
+	else if (_strncmp(cmd, "setenv", 6) == 0)
+		handle_setenv(cmd);
 
-	else if (_strncmp(command, "unsetenv", 8) == 0)
-		handle_unsetenv(command);
+	else if (_strncmp(cmd, "unsetenv", 8) == 0)
+		handle_unsetenv(cmd);
 
-	else if (_strncmp(command, "cd", 2) == 0)
+	else if (_strncmp(cmd, "cd", 2) == 0)
 	{
-		char *path = _strtok(command + 3, " ");
+		char *path = _strtok(cmd + 3, " ");
 
 		change_directory(path);
 	}
 
 	else
-		execute_prompt(command);
+		execute_prompt(cmd);
 }
 
 /**
  * execute_command_with_args - executes a command with arguments
- * @command: the command to be executed
+ * @cmd: the command to be executed
  */
-void execute_command_with_args(const char *command)
+void execute_command_with_args(const char *cmd)
 {
 	char *args[170];
 	int arg_c = 0;
-	char *tokenized_cmd = _strtok((char *)command, " ");
+	char *tokenized_cmd = _strtok((char *)cmd, " ");
 
 	while (tokenized_cmd != NULL)
 	{
 		args[arg_c++] = tokenized_cmd;
 		tokenized_cmd = _strtok(NULL, " ");
 	}
+
 	args[arg_c] = NULL;
+
 	if (execvp(args[0], args) == -1)
 		perror("bash");
 }
 
 /**
  * execute_command - executes a command with arguments
- * @command: the command to be executed
+ * @cmd: the command to be executed
 */
-void execute_command(const char *command)
+void execute_command(const char *cmd)
 {
 	char *args[170];
 	int arg_c = 0;
-	char *tokenized_cmd = _strtok((char *)command, " ");
+	char *tokenized_cmd = _strtok((char *)cmd, " ");
 
 	while (tokenized_cmd != NULL)
 	{
 		args[arg_c++] = tokenized_cmd;
 		tokenized_cmd = _strtok(NULL, " ");
 	}
+
 	args[arg_c] = NULL;
 
 	/*Check if the command exists in the PATH */
 	if (is_command_in_path(args[0]))
 	{
-		pid_t child_process = fork();
+		pid_t process_pid = fork();
 
-		if (child_process == -1)
+		if (process_pid == -1)
 		{
 			_printf("Forking error...\n");
 			exit(EXIT_FAILURE);
 		}
-		else if (child_process == 0)
+		else if (process_pid == 0)
 		{
 			/* Child process */
 			if (execvp(args[0], args) == -1)
@@ -96,16 +99,16 @@ void execute_command(const char *command)
 
 /**
  * is_command_in_path - checks if a command exists in the PATH
- * @command: the command to check
+ * @cmd: the command to be checked
  * Return: 1 if the command exists, 0 otherwise
 */
-int is_command_in_path(const char *command)
+int is_command_in_path(const char *cmd)
 {
 	char *path;
 	char *path_copy;
 	char *token;
 
-	if (access(command, F_OK) == 0)
+	if (access(cmd, F_OK) == 0)
 		return (1);
 
 	path = getenv("PATH");
@@ -114,16 +117,17 @@ int is_command_in_path(const char *command)
 
 	while (token != NULL)
 	{
-		char command_path[256];
+		char cmd_path[256];
 
-		snprintf(command_path, sizeof(command_path), "%s/%s", token, command);
-		if (access(command_path, F_OK) == 0)
+		snprintf(cmd_path, sizeof(cmd_path), "%s/%s", token, cmd);
+		if (access(cmd_path, F_OK) == 0)
 		{
 			free(path_copy);
 			return (1);
 		}
 		token = _strtok(NULL, ":");
 	}
+
 	free(path_copy);
 	return (0);
 }

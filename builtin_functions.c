@@ -64,13 +64,13 @@ void print_environment(void)
 
 /**
  * set_environment_variable - sets or updates an environment variable
- * @variable: the name of the environment variable
- * @value: the value to set for the environment variable
+ * @var: the name of the environment variable
+ * @val: the value to set for the environment variable
  * Return: 0 on success, -1 on failure
  */
-int set_environment_variable(const char *variable, const char *value)
+int set_environment_variable(const char *var, const char *val)
 {
-	if (setenv(variable, value, 1) == -1)
+	if (setenv(var, val, 1) == -1)
 	{
 		perror("setenv");
 		return (-1);
@@ -80,15 +80,16 @@ int set_environment_variable(const char *variable, const char *value)
 
 /**
  * unset_environment_variable - unsets an environment variable
- * @variable: the name of the environment variable to unset
+ * @var: the name of the environment variable to unset
  * Return: 0 on success, -1 on failure
  */
-int unset_environment_variable(const char *variable)
+int unset_environment_variable(const char *var)
 {
-	if (unsetenv(variable) == -1)
+	if (unsetenv(var) == -1)
 	{
 		perror("unsetenv");
 		return (-1);
 	}
 	return (0);
 }
+
