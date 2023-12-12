@@ -42,7 +42,7 @@ int unset_environment_variable(const char *variable);
 
 void change_directory(const char *path);
 
-int split_commands(char *input, char *commands[]);
+int split_commands(char *input, char *cmds[]);
 
 void exit_shell(int status);
 void handle_exit(char *command);
