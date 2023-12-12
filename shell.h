@@ -46,7 +46,7 @@ int unset_environment_variable(const char *variable);
 void change_directory(const char *path);
 int split_commands(char *input, char *commands[]);
 void handle_exit(char *command);
-void process_command(char *command);
+void process_cmd(char *command);
 
 
 void my_printf(const char *print_command, ...);
