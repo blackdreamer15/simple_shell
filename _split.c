@@ -10,7 +10,7 @@
 char **split_string(char *str, size_t len)
 {
 	char *delim = " ";
-	char **words = malloc(sizeof(char *) * (MAX_INPUT));
+	char **words = malloc(sizeof(char *) * (len));
 	int count = 0;
 	char *token;
 
@@ -19,7 +19,7 @@ char **split_string(char *str, size_t len)
 
 	while (token != NULL)
 	{
-		words[count] = strdup(token);
+		words[count] = _strdup(token);
 		count++;
 
 		token = strtok(NULL, delim);

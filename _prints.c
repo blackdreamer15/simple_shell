@@ -30,3 +30,53 @@ int prompt(char *c)
 	_putchar(' ');
 	return (0);
 }
+
+
+/**
+ * print_list - prints the contents of a linked list
+ * @h: the given linked list
+ *
+ * Return: number of nodes
+ */
+size_t print_list(const list_t *h)
+{
+	int num_nodes = 0;
+	const list_t *current = h;
+
+	while (current)
+	{
+		if (current->str)
+			printf("[%d] %s\n", current->len, current->str);
+		else
+			printf("[0] (nil)\n");
+
+		num_nodes++;
+		current = current->next;
+	}
+
+	return (num_nodes);
+}
+
+/**
+ * printdir-prints directory in path
+ * @str: input string
+ *
+ * Return: 0 on success
+ */
+int printdir(char *str)
+{
+	char *tmp = getenv(str);
+
+	while (*tmp)
+	{
+		if (*tmp == ':')
+		{
+			_putchar('\n');
+			tmp++;
+			continue;
+		}
+		_putchar(*tmp);
+		tmp++;
+	}
+	return (0);
+}

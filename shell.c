@@ -11,7 +11,7 @@
  */
 int execute_cmd(char **av, pid_t pid, int *status, int flag)
 {
-	char *cmd = malloc(sizeof(char) * (strlen(av[0]) + 7));
+	char *cmd = malloc(sizeof(char) * (_strlen(av[0]) + 7));
 
 	if (pid == 0)
 	{
@@ -32,9 +32,7 @@ int execute_cmd(char **av, pid_t pid, int *status, int flag)
 		wait(status);
 		free(cmd);
 	}
-	if (flag)
-		return (0);
-	return (1);
+	return (0);
 }
 
 /**
