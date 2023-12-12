@@ -14,12 +14,15 @@ int main(void)
 	while (1)
 	{
 		display_prompt();
-		read_input(usr_cmd, sizeof(usr_cmd));
+
+		get_input(usr_cmd, sizeof(usr_cmd));
+
 		cmd_count = split_commands(usr_cmd, cmds);
 
 		for (i = 0; i < cmd_count; ++i)
 			process_cmd(cmds[i]);
 	}
+
 	return (0);
 }
 
