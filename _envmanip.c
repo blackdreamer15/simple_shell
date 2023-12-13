@@ -104,6 +104,8 @@ list_t *mklist(char *s)
 	list_t *e_list;
 
 	e_list = malloc(sizeof(list_t));
+	if (!e_list)
+		return (0);
 	str = strtok(_getenv(s), ":");
 	while (str != NULL)
 	{

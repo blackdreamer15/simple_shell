@@ -41,31 +41,34 @@ char *_strdup(char *str)
 size_t _strlen(char *s)
 {
 	size_t i = 0;
+	if (!s)
+		return (0);
 
 	while (s[i])
 		i++;
 	return (i);
 }
+
 /**
- * _strcpy - copies src to dest array
- * @dest: destination array
- * @src: source
+ * _strchr- finds a character in a given string
+ * @s: input string
+ * @c: character to find
  *
- * Return: pointer to destination
+ * Return: the found character
+ * otherwise return NULL
  */
-char *_strcpy(char *dest, char *src)
+char *_strchr(char *s, char c)
 {
-	int i = 0;
+	char *ptr = s;
 
-	while (src[i] != '\0')
+	while (*ptr != '\0' && *ptr != c)
 	{
-		dest[i] = src[i];
-		i++;
+		ptr++;
 	}
-	dest[i] = src[i];
-	return (&dest[0]);
+	if (*ptr == c)
+		return (ptr);
+	return (0);
 }
-
 /**
  * _strcat- concatenates 2 strings
  * @s1: input string
@@ -96,7 +99,6 @@ char *_strcat(char *s1, char *s2)
 
 	return (ptr);
 }
-
 /**
  * _strcmp- compares two strings
  * @s1: input string 1

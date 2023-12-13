@@ -18,7 +18,7 @@ int main(int ac, char *av[])
 	if (ac > 1)
 	{
 		child_pid = fork();
-		execute_cmd(av, child_pid, &status, 0);
+		_execvp(av, &status, 0);
 	}
 
 	prompt(0);
@@ -32,12 +32,8 @@ int main(int ac, char *av[])
 		}
 
 		argv = split_string(cmd); /*take command to argv*/
-		child_pid = fork();
 
-		if (child_pid == -1)
-			continue;
-
-		execute_cmd(argv, child_pid, &status, 1);
+		_execvp(argv, &status, 1);
 		prompt(0);
 		free(cmd);
 		free_av(argv);

@@ -47,13 +47,14 @@ char *_getenv(const char *name);
 int _setenv(const char *name, const char *value, int overwrite);
 int _unsetenv(const char *name);
 size_t _arrlen(char **arr);
+list_t *mklist(char *str);
 
 /*_split.c*/
 void free_av(char **av);
 char **split_string(char *str);
 
 /*_strmanip.c*/
-char *_strcpy(char *dest, char *src);
+char *_strchr(char *dest, char src);
 char *_strdup(char *str);
 char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
@@ -65,6 +66,6 @@ int _putchar(char c);
 int prompt(char *c);
 char **split_string(char *str);
 void free_av(char **av);
-int execute_cmd(char **av, pid_t pid, int *status, int flag);
+int _execvp(char **av, int *status, int flag);
 
 #endif /* SHELL_H */
