@@ -9,14 +9,14 @@
 char *spath(list_t *ls, char *cmd)
 {
 	struct stat st;
-	char *s, *str;
+	char *s, *str = NULL;
 
 	while(ls)
 	{
 		if (ls->str)
 		{
-			str = _strcat(ls->str, "/");
-			str = _strcat(str, cmd);
+			s = _strcat(ls->str, "/");
+			str = _strcat(s, cmd);
 		}
 		if(str && (stat(str, &st) == 0))
 		{
@@ -24,6 +24,8 @@ char *spath(list_t *ls, char *cmd)
 		}
 		ls = ls->next;
 	}
+	free(s);
+	free(str);
 	return(0);
 }
 
@@ -40,7 +42,6 @@ int _execvp(char **av, int *status, int flag)
 {
 	list_t *ls;
 	pid_t pid;
-	char *cmd = "Erro";
 	char *str, *s, *s1;
 
 	if ((ls = mklist("PATH")) == NULL)
@@ -58,7 +59,9 @@ int _execvp(char **av, int *status, int flag)
 		pid = fork();
 	else
 	{
+		free_list(ls);
 		printf("Not Found\n");
+		_setenv("PATH", "/usr:/usr/sbin:/usr/local/sbin:/bin", 1);
 		return (0);
 	}
 
@@ -66,12 +69,12 @@ int _execvp(char **av, int *status, int flag)
 	{
 		if (flag && (execve(str, av, environ)== -1))
 		{
-			perror(cmd);
+			perror(0);
 		}
 
 		else if (!flag && (execve(str, av + 1, environ) == -1))
 		{
-			perror(cmd);
+			perror(0);
 		}
 
 		exit(1);
@@ -80,12 +83,9 @@ int _execvp(char **av, int *status, int flag)
 	{
 		wait(status);
 		if (!s1 && !s)
-		{
-			free(ls);
 			free(str);
-		}
+		free_list(ls);
 		_setenv("PATH", "/usr:/usr/sbin:/usr/local/sbin:/bin", 1);
-
 	}
 	return (0);
 }

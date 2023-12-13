@@ -12,12 +12,10 @@ int main(int ac, char *av[])
 	char *cmd = NULL; /* initialize to NULL*/
 	size_t len = 0;	  /* initialize to 0*/
 	ssize_t nread;
-	pid_t child_pid;
 	int status;
 
 	if (ac > 1)
 	{
-		child_pid = fork();
 		_execvp(av, &status, 0);
 	}
 
@@ -40,6 +38,7 @@ int main(int ac, char *av[])
 		cmd = 0;
 		len = 0; /* reset to 0*/
 	}
+	_unsetenv("PATH");
 	free(cmd);
 	return (0);
 }
