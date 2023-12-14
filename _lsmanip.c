@@ -58,7 +58,7 @@ list_t *add_node_end(list_t **head, const char *str)
 	if (new == NULL)
 		return (NULL);
 
-	new->str = _strdup((char *)str);
+	new->str = strdup((char *)str);
 
 	for (nchar = 0; str[nchar]; nchar++);
 
@@ -87,14 +87,12 @@ list_t *add_node_end(list_t **head, const char *str)
  */
 void free_list(list_t *head)
 {
-	printf("%p\n", head);
 	list_t *current, *next;
 
 	current = head;
 
 	while (current)
 	{
-		printf("kka\n");
 		next = current->next;
 		free(current->str);
 		free(current);
