@@ -54,6 +54,7 @@ void free_av(char **av);
 char **split_string(char *str);
 
 /*_strmanip.c*/
+char *_str_cat(char *dest, char *src);
 char *_strchr(char *dest, char src);
 char *_strdup(char *str);
 char *_strcat(char *dest, char *src);

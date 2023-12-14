@@ -11,6 +11,7 @@ char *spath(const list_t *ls, char *cmd)
 	struct stat st;
 	char *s, *str = NULL;
 
+	print_list(ls);
 	while(ls)
 	{
 		if (ls->str)

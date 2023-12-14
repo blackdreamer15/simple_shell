@@ -38,9 +38,9 @@ int _setenv(const char *name, const char *value, int overwrite)
 	{
 		return (-1);
 	}
-	str = _strcat((char *)name, "=");
+	str = _str_cat((char *)name, "=");
 	s = str;
-	str = _strcat(str, (char *)value);
+	str = _str_cat(str, (char *)value);
 
 	while (*tmp)
 	{
@@ -50,16 +50,13 @@ int _setenv(const char *name, const char *value, int overwrite)
 			if (overwrite)
 			{
 				*tmp = str;
-				free(s);
 				return (0);
 			}
 			return (0);
 		}
 		tmp++;
 	}
-	free(*tmp);
 	*tmp = str;
-	free(s);
 	*(tmp + 1) = NULL;
 	return (0);
 }
