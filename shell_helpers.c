@@ -6,7 +6,7 @@
  *
  * Return: 0 if found
  */
-char *spath(list_t *ls, char *cmd)
+char *spath(const list_t *ls, char *cmd)
 {
 	struct stat st;
 	char *s, *str = NULL;
@@ -20,12 +20,16 @@ char *spath(list_t *ls, char *cmd)
 		}
 		if(str && (stat(str, &st) == 0))
 		{
+			free(s);
 			return (str);
 		}
+		free(s);
+		free(str);
+		s = 0;
+		str = 0;
 		ls = ls->next;
 	}
-	free(s);
-	free(str);
+	printf("Not Found\n");
 	return(0);
 }
 
@@ -40,28 +44,26 @@ char *spath(list_t *ls, char *cmd)
  */
 int _execvp(char **av, int *status, int flag)
 {
-	list_t *ls;
+	list_t *ls = 0;
 	pid_t pid;
-	char *str, *s, *s1;
+	char *str = NULL, *s, *s1;
 
 	if ((ls = mklist("PATH")) == NULL)
 		return (-1);
 	if (flag && ((s = _strchr(av[0], '/')) != 0))
-		str = av[0];
+			str = av[0];
 	else if (!flag && ((s1 = _strchr(av[1], '/')) != 0))
 		str = av[1];
 	else if (flag)
 		str = spath(ls, av[0]);
 	else
 		str = spath(ls, av[1]);
-
 	if (str)
 		pid = fork();
 	else
 	{
 		free_list(ls);
-		printf("Not Found\n");
-		_setenv("PATH", "/usr:/usr/sbin:/usr/local/sbin:/bin", 1);
+		printf("Not w Found\n");
 		return (0);
 	}
 
@@ -82,10 +84,8 @@ int _execvp(char **av, int *status, int flag)
 	else
 	{
 		wait(status);
-		if (!s1 && !s)
-			free(str);
+		free(str);
 		free_list(ls);
-		_setenv("PATH", "/usr:/usr/sbin:/usr/local/sbin:/bin", 1);
 	}
 	return (0);
 }

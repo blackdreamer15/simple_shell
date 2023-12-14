@@ -51,6 +51,7 @@ size_t print_list(const list_t *h)
 			printf("[0] (nil)\n");
 
 		num_nodes++;
+		printf("POP\n");
 		current = current->next;
 	}
 

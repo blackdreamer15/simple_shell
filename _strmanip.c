@@ -59,14 +59,16 @@ size_t _strlen(char *s)
  */
 char *_strchr(char *s, char c)
 {
+	if (!s)
+		return (0);
 	char *ptr = s;
 
-	while (*ptr != '\0' && *ptr != c)
+	while (*ptr)
 	{
+		if (*ptr == c)
+			return (ptr);
 		ptr++;
 	}
-	if (*ptr == c)
-		return (ptr);
 	return (0);
 }
 /**
@@ -98,6 +100,32 @@ char *_strcat(char *s1, char *s2)
 	*(ptr + i + 1) = '\0';
 
 	return (ptr);
+}
+
+/**
+ * _strcat- concatenates 2 strings
+ * @dest: destination string
+ * @src: source string
+ * Return: concatenated string(dest)
+ */
+char *_str_cat(char *dest, char *src)
+{
+	int i, j;
+
+	for (i = 0; i >= 0; i++)
+	{
+		if (dest[i] == '\0')
+			break;
+	}
+	for (j = 0; j >= 0; j++)
+	{
+		if (src[j] == '\0')
+			break;
+		dest[i] = src[j];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
 /**
  * _strcmp- compares two strings

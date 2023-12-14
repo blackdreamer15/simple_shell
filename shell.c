@@ -14,6 +14,7 @@ int main(int ac, char *av[])
 	ssize_t nread;
 	int status;
 
+	_setenv("PATH", "/usr/loca/sbin:/usr/sbin:/bin", 1);
 	if (ac > 1)
 	{
 		_execvp(av, &status, 0);
@@ -32,13 +33,14 @@ int main(int ac, char *av[])
 		argv = split_string(cmd); /*take command to argv*/
 
 		_execvp(argv, &status, 1);
+		_unsetenv("PATH");
+		_setenv("PATH", "/usr/loca/sbin:/usr/sbin:/bin", 1);
 		prompt(0);
 		free(cmd);
 		free_av(argv);
 		cmd = 0;
 		len = 0; /* reset to 0*/
 	}
-	_unsetenv("PATH");
 	free(cmd);
 	return (0);
 }

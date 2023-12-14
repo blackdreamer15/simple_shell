@@ -87,13 +87,16 @@ list_t *add_node_end(list_t **head, const char *str)
  */
 void free_list(list_t *head)
 {
+	printf("%p\n", head);
 	list_t *current, *next;
 
 	current = head;
 
-	while (!current)
+	while (current)
 	{
+		printf("kka\n");
 		next = current->next;
+		free(current->str);
 		free(current);
 		current = next;
 	}
