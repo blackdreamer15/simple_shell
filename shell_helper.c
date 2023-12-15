@@ -77,12 +77,11 @@ int process_cmd(void)
 	char *cmd, **av;
 	size_t len;
 
-	prompt(0);
+	prompt("#cisfun$ ");
 	if (getline(&cmd, &len, stdin) != -1)
 	{
 		if (*cmd == '\n')
 		{
-			prompt(0);
 			return (1);
 		}
 		av = split_string(cmd);
