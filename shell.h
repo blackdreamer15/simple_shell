@@ -28,6 +28,11 @@ typedef struct list_s
 	struct list_s *next;
 } list_t;
 
+/*shell_helper*/
+char *spath(char *cmd, list_t *ls);
+int _execvep(char **av, char *cmd);
+int process_cmd(list_t *ls);
+
 /*_lsmanip.c*/
 size_t list_len(const list_t *h);
 list_t *add_node(list_t **head, const char *str);
@@ -54,7 +59,6 @@ void free_av(char **av);
 char **split_string(char *str);
 
 /*_strmanip.c*/
-char *_str_cat(char *dest, char *src);
 char *_strchr(char *dest, char src);
 char *_strdup(char *str);
 char *_strcat(char *dest, char *src);
@@ -63,10 +67,8 @@ size_t _strlen(char *s);
 
 extern char **environ;
 
-int _putchar(char c);
-int prompt(char *c);
+/*_split.c*/
 char **split_string(char *str);
 void free_av(char **av);
-int _execvp(char **av, int *status, int flag);
 
 #endif /* SHELL_H */

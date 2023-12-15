@@ -58,7 +58,7 @@ list_t *add_node_end(list_t **head, const char *str)
 	if (new == NULL)
 		return (NULL);
 
-	new->str = strdup((char *)str);
+	new->str = _strdup((char *)str);
 
 	for (nchar = 0; str[nchar]; nchar++);
 

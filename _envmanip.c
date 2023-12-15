@@ -38,9 +38,9 @@ int _setenv(const char *name, const char *value, int overwrite)
 	{
 		return (-1);
 	}
-	str = _str_cat((char *)name, "=");
+	str = _strcat((char *)name, "=");
 	s = str;
-	str = _str_cat(str, (char *)value);
+	str = _strcat(str, (char *)value);
 
 	while (*tmp)
 	{
@@ -96,17 +96,18 @@ char *_getenv(const char *name)
  */
 list_t *mklist(char *s)
 {
+	list_t *e_list = 0;
 	char *str;
+	char *s0 = _strdup(_getenv("PATH"));
 
-	list_t *e_list;
+	str = strtok(s0, ":");
 
-	e_list = malloc(sizeof(list_t));
-	str = strtok(_getenv(s), ":");
 	while (str != NULL)
 	{
 		add_node(&e_list, str);
 		str = strtok(NULL, ":");
 	}
+	free(s0);
 	return (e_list);
 }
 

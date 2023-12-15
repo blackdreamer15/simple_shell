@@ -71,6 +71,32 @@ char *_strchr(char *s, char c)
 	}
 	return (0);
 }
+
+/**
+ * _strcat- concatenates 2 strings
+ * @dest: destination string
+ * @src: source string
+ * Returin: concatenated string(dest)
+ */
+char *_strcat(char *dest, char *src)
+{
+	int i, j;
+
+	for (i = 0; i >= 0; i++)
+	{
+		if (dest[i] == '\0')
+			break;
+	}
+	for (j = 0; j >= 0; j++)
+	{
+		if (src[j] == '\0')
+			break;
+		dest[i] = src[j];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
 /**
  * _strcat- concatenates 2 strings
  * @s1: input string
@@ -78,7 +104,7 @@ char *_strchr(char *s, char c)
  *
  * Return: pointer to concatenated string
  */
-char *_strcat(char *s1, char *s2)
+char *_str_cat(char *s1, char *s2)
 {
 	int n, m;
 	int i, j;
@@ -102,31 +128,6 @@ char *_strcat(char *s1, char *s2)
 	return (ptr);
 }
 
-/**
- * _strcat- concatenates 2 strings
- * @dest: destination string
- * @src: source string
- * Return: concatenated string(dest)
- */
-char *_str_cat(char *dest, char *src)
-{
-	int i, j;
-
-	for (i = 0; i >= 0; i++)
-	{
-		if (dest[i] == '\0')
-			break;
-	}
-	for (j = 0; j >= 0; j++)
-	{
-		if (src[j] == '\0')
-			break;
-		dest[i] = src[j];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
 /**
  * _strcmp- compares two strings
  * @s1: input string 1

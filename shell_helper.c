@@ -1,41 +1,96 @@
 #include "shell.h"
 
 /**
- * execute_cmd- executes command
- * @av: input command
- * @pid: current process id
- * @flag: flag
- * @status: status
+ * spath- searches for cmd file
  *
- * Return: 0 on success
+ * @cmd: input command
+ * @ls: input path list
+ *
+ * Return: pointer found path on sucess, NULL otherwise
  */
-int execute_cmd(char **av, pid_t pid, int *status, int flag)
+char *spath(char *cmd, list_t *ls)
 {
-	char *cmd = malloc(sizeof(char) * (strlen(av[0]) + 7));
+	struct stat st;
+	char *str;
 
-	if (pid == 0)
+	while (ls)
 	{
-		if (flag && (execve(av[0], av, environ)) == -1)
+		printf("brak\n");
+		if (ls->str)
 		{
-			sprintf(cmd, "bash: %s", av[0]);
-			perror(cmd);
+			str = _strcat(ls->str, "/");
+			str = _strcat(str, cmd);
+		}
+		if (stat(str, &st) == 0)
+			return (str);
+
+		ls = ls->next;
+	}
+	return (0);
+}
+/**
+ * _execvep- executes with path
+ *
+ * @av: input argument
+ * @cmd: input string
+ * @ls: input list of paths
+ *
+ * Return: -1 if fail
+ */
+int _execvep(char **av, char *cmd)
+{
+	list_t *ls = mklist("PATH");
+	char *str = spath(cmd, ls);
+	pid_t pid;
+	int status;
+
+	if (str)
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			if ((execve(str, av, environ)) == -1)
+				perror(0);
+			exit(1);
 		}
 
-		else if (!flag && (execve(av[1], av + 1, environ)) == -1)
+		else
 		{
-			sprintf(cmd, "bash: %s", av[1]);
-			perror(cmd);
+			wait(&status);
+			free_list(ls);
+			return (0);
 		}
-
-		exit(1);
 	}
-	else
+	printf("break\n");
+	free_list(ls);
+	return (-1);
+}
+
+/**
+ * process_cmd- gets command
+ * @ls: input list
+ *
+ * Return: non zero on success
+ */
+int process_cmd(list_t *ls)
+{
+	char *cmd, **av;
+	size_t len;
+
+	prompt(0);
+	if ((getline(&cmd, &len, stdin)) != -1)
 	{
-		wait(status);
-		free(cmd);
-	}
+		if (*cmd == '\n')
+		{
+			prompt(0);
+			return (1);
+		}
+		av = split_string(cmd);
+		_execvep(av, av[0]);
 
-	if (flag)
-		return (0);
+	}
+	free_av(av);
+	free(cmd);
+	cmd = NULL;
 	return (1);
 }
