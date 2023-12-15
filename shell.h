@@ -1,54 +1,79 @@
 #ifndef SHELL_H
 #define SHELL_H
 
-#ifndef PATH_MAX
-#define PATH_MAX 4096
-#endif
-
-#define BUFFER_SIZE 1024
-#define MAX_ARGS 170
-
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
-#include <stdbool.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <stdarg.h>
-#include <errno.h>
-#include <stddef.h>
-#include <limits.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/sysmacros.h>
+#define MAX_INPUT 1024
+#define MAX_ARGS 64
 
+/**
+ * struct list_s - singly linked list
+ * @str: string - (malloc'ed string)
+ * @len: length of the string
+ * @next: points to the next node
+ *
+ * Description: singly linked list node structure
+ * for Holberton project
+ */
+typedef struct list_s
+{
+	char *str;
+	unsigned int len;
+	struct list_s *next;
+} list_t;
+
+/*shell_helper*/
+char *spath(char *cmd, list_t *ls);
+int _execvep(char **av, char *cmd);
+int process_cmd(list_t *ls);
+
+/*_lsmanip.c*/
+size_t list_len(const list_t *h);
+list_t *add_node(list_t **head, const char *str);
+list_t *add_node_end(list_t **head, const char *str);
+void free_list(list_t *head);
+
+/*prints.c*/
+void _puts(char *s);
+void _perror(char *str);
+int prompt(char *c);
+int _putchar(char c);
+size_t print_list(const list_t *h);
+int printdir(char *str);
 
 extern char **environ;
 
-void display_prompt(void);
-void get_input(char *input, size_t input_size);
-void execute_prompt(const char *cmd);
+/*_envmanip.c*/
+char *_getenv(const char *name);
+int _setenv(const char *name, const char *value, int overwrite);
+int _unsetenv(const char *name);
+size_t _arrlen(char **arr);
+list_t *mklist(char *str);
 
-void process_cmd(char *cmd);
-void exec_cmd_with_args(const char *cmd);
-void exec_cmd(const char *cmd);
-int cmd_in_path_checker(const char *cmd);
+/*_split.c*/
+void free_av(char **av);
+char **split_string(char *str);
 
-void print_env(void);
-void handle_setenv(const char *cmd);
-void handle_unsetenv(const char *cmd);
-int set_env_var(const char *var, const char *val);
-int unset_env_var(const char *var);
+/*_strmanip.c*/
+char *_strchr(char *dest, char src);
+char *_strdup(char *str);
+char *_strcat(char *dest, char *src);
+int _strcmp(char *s1, char *s2);
+size_t _strlen(char *s);
 
-void change_dir(const char *path);
+extern char **environ;
 
-int split_str(char *input, char *cmds[]);
+/*_split.c*/
+char **split_string(char *str);
+void free_av(char **av);
 
-void exit_shell(int status);
-void handle_exit(char *command);
-
-void _printf(const char *print_command, ...);
-ssize_t _getline(char **lineptr, size_t *n);
-char *_strtok(char *input_str, char *delimiter);
-int _strncmp(const char *str1, const char *str2, size_t max_chars);
+/*_mprints.c*/
+int print_int(int n);
 
 #endif /* SHELL_H */
-
