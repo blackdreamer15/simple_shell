@@ -11,17 +11,27 @@
 char *spath(char *cmd, list_t *ls)
 {
 	struct stat st;
-	char *str, cwd[1024];
+	char *str = NULL, cwd[1024];
+
+	if (stat(cmd, &st) == 0)
+		return (cmd);
 
 	if (*cmd == '.')
 	{
 		getcwd(cwd, 1024);
 		str = _strcat(cwd, (cmd + 1));
-		printf("%s\n", str);
-		return (str);
+		if (stat(str, &st) == 0)
+			return (cmd + 2);
+		_perror(cmd);
+		return (0);
 	}
 	if (_strchr(cmd, '/') != 0)
-		return (cmd);
+	{
+		if (stat(str, &st) == 0)
+			return (cmd);
+		_perror(cmd);
+		return (0);
+	}
 	while (ls)
 	{
 		if (ls->str)
@@ -87,7 +97,7 @@ int process_cmd(void)
 	char *cmd, **av;
 	size_t len;
 
-	prompt("#cisfun$ ");
+	prompt("#cisfun$");
 	if (getline(&cmd, &len, stdin) != -1)
 	{
 		if (*cmd == '\n')
