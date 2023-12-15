@@ -60,11 +60,12 @@ list_t *add_node_end(list_t **head, const char *str)
 
 	new->str = _strdup((char *)str);
 
-	for (nchar = 0; str[nchar]; nchar++);
-
-	new->len = nchar;
-	new->next = NULL;
-	temp = *head;
+	for (nchar = 0; str[nchar]; nchar++)
+	{
+		new->len = nchar;
+		new->next = NULL;
+		temp = *head;
+	}
 
 	if (temp == NULL)
 	{

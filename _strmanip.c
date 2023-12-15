@@ -41,6 +41,7 @@ char *_strdup(char *str)
 size_t _strlen(char *s)
 {
 	size_t i = 0;
+
 	if (!s)
 		return (0);
 
@@ -76,7 +77,7 @@ char *_strchr(char *s, char c)
  * _strcat- concatenates 2 strings
  * @dest: destination string
  * @src: source string
- * Returin: concatenated string(dest)
+ * Return: concatenated string(dest)
  */
 char *_strcat(char *dest, char *src)
 {
@@ -96,36 +97,6 @@ char *_strcat(char *dest, char *src)
 	}
 	dest[i] = '\0';
 	return (dest);
-}
-/**
- * _strcat- concatenates 2 strings
- * @s1: input string
- * @s2: input string
- *
- * Return: pointer to concatenated string
- */
-char *_str_cat(char *s1, char *s2)
-{
-	int n, m;
-	int i, j;
-	char *ptr;
-
-	n = _strlen(s1);
-	m = _strlen(s2);
-	ptr = malloc(sizeof(char) * (n + m + 1));
-
-	if (ptr == 0)
-		return (0);
-	for (i = 0; i < (n); i++)
-		*(ptr + i) = *(s1 + i);
-	for (j = 0; j < m; j++)
-	{
-		*(ptr + i) = *(s2 + j);
-		i++;
-	}
-	*(ptr + i + 1) = '\0';
-
-	return (ptr);
 }
 
 /**

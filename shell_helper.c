@@ -15,7 +15,6 @@ char *spath(char *cmd, list_t *ls)
 
 	while (ls)
 	{
-		printf("brak\n");
 		if (ls->str)
 		{
 			str = _strcat(ls->str, "/");
@@ -26,6 +25,7 @@ char *spath(char *cmd, list_t *ls)
 
 		ls = ls->next;
 	}
+	printf("kael\n");
 	return (0);
 }
 /**
@@ -61,7 +61,6 @@ int _execvep(char **av, char *cmd)
 			return (0);
 		}
 	}
-	printf("break\n");
 	free_list(ls);
 	return (-1);
 }
