@@ -23,7 +23,7 @@ int prompt(char *c)
 	size_t i;
 
 	if (c == 0)
-		_putchar('$');
+		_putchar('#');
 	else
 		for (i = 0; i < strlen(c); i++)
 			_putchar(c[i]);

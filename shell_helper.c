@@ -78,7 +78,7 @@ int process_cmd(void)
 	size_t len;
 
 	prompt(0);
-	if ((getline(&cmd, &len, stdin)) != -1)
+	if (getline(&cmd, &len, stdin) != -1)
 	{
 		if (*cmd == '\n')
 		{
@@ -87,8 +87,13 @@ int process_cmd(void)
 		}
 		av = split_string(cmd);
 		_execvep(av, av[0]);
-
 	}
+	else
+	{
+		_putchar('\n');
+		exit(0);
+	}
+
 	free_av(av);
 	free(cmd);
 	cmd = NULL;
