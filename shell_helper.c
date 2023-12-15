@@ -11,8 +11,17 @@
 char *spath(char *cmd, list_t *ls)
 {
 	struct stat st;
-	char *str;
+	char *str, cwd[1024];
 
+	if (*cmd == '.')
+	{
+		getcwd(cwd, 1024);
+		str = _strcat(cwd, (cmd + 1));
+		printf("%s\n", str);
+		return (str);
+	}
+	if (_strchr(cmd, '/') != 0)
+		return (cmd);
 	while (ls)
 	{
 		if (ls->str)
@@ -25,6 +34,7 @@ char *spath(char *cmd, list_t *ls)
 
 		ls = ls->next;
 	}
+
 	if (_strchr(cmd, '/') != 0)
 		return (cmd);
 	_perror(cmd);
