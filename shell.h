@@ -40,6 +40,8 @@ list_t *add_node_end(list_t **head, const char *str);
 void free_list(list_t *head);
 
 /*prints.c*/
+void _puts(char *s);
+void _perror(char *str);
 int prompt(char *c);
 int _putchar(char c);
 size_t print_list(const list_t *h);
@@ -70,5 +72,8 @@ extern char **environ;
 /*_split.c*/
 char **split_string(char *str);
 void free_av(char **av);
+
+/*_mprints.c*/
+int print_int(int n);
 
 #endif /* SHELL_H */

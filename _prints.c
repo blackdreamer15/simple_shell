@@ -31,7 +31,36 @@ int prompt(char *c)
 	return (0);
 }
 
+/**
+ * _puts- prints string
+ *
+ * @s: input string
+ * Return: nothing
+ */
+void _puts(char *s)
+{
+	while(*s)
+	{
+		_putchar(*s);
+		s++;
+	}
+}
 
+/**
+ * _perror
+ * str: input string
+ *
+ * Return: nothing
+ */
+void _perror(char *str)
+{
+	_puts("sh: ");
+	print_int(_strlen(str));
+	_puts(": ");
+	_puts(str);
+	_puts(": not found");
+	_putchar('\n');
+}
 /**
  * print_list - prints the contents of a linked list
  * @h: the given linked list

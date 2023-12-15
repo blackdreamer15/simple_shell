@@ -25,7 +25,9 @@ char *spath(char *cmd, list_t *ls)
 
 		ls = ls->next;
 	}
-	printf("kael\n");
+	if (_strchr(cmd, '/') != 0)
+		return (cmd);
+	_perror(cmd);
 	return (0);
 }
 /**
