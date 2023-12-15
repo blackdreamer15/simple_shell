@@ -68,11 +68,11 @@ int _execvep(char **av, char *cmd)
 
 /**
  * process_cmd- gets command
- * @ls: input list
+ *
  *
  * Return: non zero on success
  */
-int process_cmd()
+int process_cmd(void)
 {
 	char *cmd, **av;
 	size_t len;
