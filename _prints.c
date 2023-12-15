@@ -39,7 +39,7 @@ int prompt(char *c)
  */
 void _puts(char *s)
 {
-	while(*s)
+	while (*s)
 	{
 		_putchar(*s);
 		s++;
@@ -47,8 +47,8 @@ void _puts(char *s)
 }
 
 /**
- * _perror
- * str: input string
+ * _perror- prints error
+ * @str: input string
  *
  * Return: nothing
  */
@@ -85,28 +85,4 @@ size_t print_list(const list_t *h)
 	}
 
 	return (num_nodes);
-}
-
-/**
- * printdir-prints directory in path
- * @str: input string
- *
- * Return: 0 on success
- */
-int printdir(char *str)
-{
-	char *tmp = getenv(str);
-
-	while (*tmp)
-	{
-		if (*tmp == ':')
-		{
-			_putchar('\n');
-			tmp++;
-			continue;
-		}
-		_putchar(*tmp);
-		tmp++;
-	}
-	return (0);
 }

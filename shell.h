@@ -31,7 +31,7 @@ typedef struct list_s
 /*shell_helper*/
 char *spath(char *cmd, list_t *ls);
 int _execvep(char **av, char *cmd);
-int process_cmd(list_t *ls);
+int process_cmd();
 
 /*_lsmanip.c*/
 size_t list_len(const list_t *h);

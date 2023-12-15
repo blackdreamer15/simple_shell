@@ -14,7 +14,7 @@ int main(int ac, char *av[])
 		_execvep(av + 1, av[1]);
 	while (1)
 	{
-		process_cmd(ls);
+		process_cmd();
 	}
 	free_list(ls);
 }

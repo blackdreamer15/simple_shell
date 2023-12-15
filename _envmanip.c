@@ -31,7 +31,7 @@ int ncmp(char *str, char const *s, size_t l)
 int _setenv(const char *name, const char *value, int overwrite)
 {
 	size_t i = 0, l = _strlen((char *)(name));
-	char *s, *str;
+	char *str;
 	char **tmp = environ;
 
 	if (!name)
@@ -39,7 +39,6 @@ int _setenv(const char *name, const char *value, int overwrite)
 		return (-1);
 	}
 	str = _strcat((char *)name, "=");
-	s = str;
 	str = _strcat(str, (char *)value);
 
 	while (*tmp)
@@ -98,7 +97,7 @@ list_t *mklist(char *s)
 {
 	list_t *e_list = 0;
 	char *str;
-	char *s0 = _strdup(_getenv("PATH"));
+	char *s0 = _strdup(_getenv(s));
 
 	str = strtok(s0, ":");
 

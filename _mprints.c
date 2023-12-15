@@ -41,3 +41,27 @@ int print_int(int n)
 
 	return (i);
 }
+
+/**
+ * printdir-prints directory in path
+ * @str: input string
+ *
+ * Return: 0 on success
+ */
+int printdir(char *str)
+{
+	char *tmp = getenv(str);
+
+	while (*tmp)
+	{
+		if (*tmp == ':')
+		{
+			_putchar('\n');
+			tmp++;
+			continue;
+		}
+		_putchar(*tmp);
+		tmp++;
+	}
+	return (0);
+}

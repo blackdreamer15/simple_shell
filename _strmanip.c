@@ -60,9 +60,11 @@ size_t _strlen(char *s)
  */
 char *_strchr(char *s, char c)
 {
+	char *ptr;
+
 	if (!s)
 		return (0);
-	char *ptr = s;
+	ptr = s;
 
 	while (*ptr)
 	{

@@ -34,8 +34,7 @@ char *spath(char *cmd, list_t *ls)
  * _execvep- executes with path
  *
  * @av: input argument
- * @cmd: input string
- * @ls: input list of paths
+ * @cmd: input
  *
  * Return: -1 if fail
  */
@@ -73,7 +72,7 @@ int _execvep(char **av, char *cmd)
  *
  * Return: non zero on success
  */
-int process_cmd(list_t *ls)
+int process_cmd()
 {
 	char *cmd, **av;
 	size_t len;
