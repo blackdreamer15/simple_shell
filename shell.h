@@ -68,6 +68,7 @@ int _strcmp(char *s1, char *s2);
 size_t _strlen(char *s);
 
 extern char **environ;
+extern int _count;
 
 /*_split.c*/
 char **split_string(char *str);
@@ -75,5 +76,5 @@ void free_av(char **av);
 
 /*_mprints.c*/
 int print_int(int n);
-
+int _puterr(char c);
 #endif /* SHELL_H */

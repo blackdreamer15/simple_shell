@@ -97,7 +97,7 @@ int process_cmd(void)
 	char *cmd, **av;
 	size_t len;
 
-	prompt("#cisfun$");
+	prompt("#");
 	if (getline(&cmd, &len, stdin) != -1)
 	{
 		if (*cmd == '\n')

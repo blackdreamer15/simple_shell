@@ -1,4 +1,16 @@
 #include "shell.h"
+
+/**
+ * _puterr - writes the character c to stderr
+ * @c: The character to print
+ *
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+int _puterr(char c)
+{
+	return (write(2, &c, 1));
+}
 /**
  * print_int - prints integer
  * @n: integer to be printed
@@ -14,7 +26,7 @@ int print_int(int n)
 
 	if (last < 0)
 	{
-		_putchar('-');
+		_puterr('-');
 		num = -num;
 		n = -n;
 		last = -last;
@@ -31,13 +43,13 @@ int print_int(int n)
 		while (exp > 0)
 		{
 			digit = num / exp;
-			_putchar(digit + '0');
+			_puterr(digit + '0');
 			num = num - (digit * exp);
 			exp = exp / 10;
 			i++;
 		}
 	}
-	_putchar(last + '0');
+	_puterr(last + '0');
 
 	return (i);
 }

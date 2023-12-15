@@ -41,7 +41,7 @@ void _puts(char *s)
 {
 	while (*s)
 	{
-		_putchar(*s);
+		_puterr(*s);
 		s++;
 	}
 }
@@ -55,11 +55,11 @@ void _puts(char *s)
 void _perror(char *str)
 {
 	_puts("sh: ");
-	print_int(_strlen(str));
+	print_int(_count);
 	_puts(": ");
 	_puts(str);
 	_puts(": not found");
-	_putchar('\n');
+	_puterr('\n');
 }
 /**
  * print_list - prints the contents of a linked list
